@@ -4,6 +4,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 import { AppProvider } from "../store/Provider";
 import Header from "./Header";
 import Routes from "../routes";
+import VerifyAuthenticated from './VerifyAuthenticated';
 
 const history = createBrowserHistory();
 
@@ -13,11 +14,13 @@ const App = () => {
       <Router history={history}>
         <div className="app">
           <Header />
-          <main className="app-main">
-            <Switch>
-              <Routes />
-            </Switch>
-          </main>
+          <VerifyAuthenticated>
+            <main className="app-main">
+              <Switch>
+                <Routes />
+              </Switch>
+            </main>
+          </VerifyAuthenticated>
         </div>
       </Router>
     </AppProvider>

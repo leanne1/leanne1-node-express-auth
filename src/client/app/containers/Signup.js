@@ -6,7 +6,9 @@ import get from "lodash.get";
 import pick from "lodash.pick";
 import { Formik, Form } from "formik";
 import { AppContext } from "../store/Provider";
+import { logError } from '../util';
 import ErrorMessage from "../components/ErrorMessage";
+
 
 const submitSignup = async (storeData, history, values, { setSubmitting }) => {
   try {
@@ -14,7 +16,7 @@ const submitSignup = async (storeData, history, values, { setSubmitting }) => {
     setSubmitting(false);
     history.push("/login");
   } catch (e) {
-    console.log("Signup:", get(e, "response.data")); // eslint-disable-line no-console
+    logError(e);
     setSubmitting(false);
     storeData("signup", {
       error: "There was an error signing up. Please try again"

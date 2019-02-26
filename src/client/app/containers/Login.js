@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { AppContext } from "../store/Provider";
+import { logError } from '../util';
 import ErrorMessage from "../components/ErrorMessage";
 
 const submitLogin = async (storeData, history, values, { setSubmitting }) => {
@@ -17,7 +18,7 @@ const submitLogin = async (storeData, history, values, { setSubmitting }) => {
     });
     history.push("/");
   } catch (e) {
-    console.log("Login:", get(e, "response.data")); // eslint-disable-line no-console
+    logError(e);
     setSubmitting(false);
     storeData("auth", {
       error: "There was an error logging in. Please try again"
@@ -39,7 +40,8 @@ const validate = ({ username, password }) => {
 const Login = ({ history }) => (
   <div className="content">
     <AppContext.Consumer>
-      {({ storeData }) => {
+      {({ storeData, auth }) => {
+        const loginError = get(auth, "error");
         return (
           <section className="card login">
             <Formik
@@ -54,6 +56,11 @@ const Login = ({ history }) => (
                 <Form>
                   <div className="card-body">
                     <h2 className="card-title">Login</h2>
+                    {loginError && (
+                      <div className="alert alert-danger" role="alert">
+                        {loginError}
+                      </div>
+                    )}
                     <div className="form-group">
                       <label htmlFor="username">Username</label>
                       <input

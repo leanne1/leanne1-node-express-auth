@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { attemptAsync, validateBody } from "../middleware";
+import { attemptAsync, validateBody, authenticate } from "../middleware";
 import { validateAuth } from "../validate";
 
 const router = express.Router();
@@ -16,7 +16,7 @@ router.post(
   })
 );
 
-router.get("/me", (req, res) => {
+router.get("/me", authenticate, (req, res) => {
   return res.send({
     username: req.user.username
   });
