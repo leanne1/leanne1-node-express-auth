@@ -15,7 +15,7 @@ const submitSignup = async (storeData, history, values, { setSubmitting }) => {
     setSubmitting(false);
     history.push("/login");
   } catch (e) {
-    logError('Signup', e);
+    logError("Signup", e);
     setSubmitting(false);
     storeData("signup", {
       error: "There was an error signing up. Please try again"

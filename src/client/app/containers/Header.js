@@ -18,7 +18,7 @@ const logout = async (storeData, resetData, history) => {
     resetData("content", "signup");
     history.push("/login");
   } catch (e) {
-    logError('Logout', e);
+    logError("Logout", e);
   }
 };
 

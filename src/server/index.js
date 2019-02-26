@@ -43,6 +43,9 @@ app.use(morgan("tiny"));
 // Sessions and passport
 app.use(
   session({
+    store: new RedisStore({
+      url: process.env.REDIS_STORE_URL
+    }),
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false
@@ -52,7 +55,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 useApi(app);
-app.use(handleError);
 
 // Serve static files
 if (isDev) {
@@ -71,6 +73,8 @@ if (isDev) {
   app.use("/", express.static(clientDirPath));
   app.use("/dist", express.static(clientDirPath));
 }
+
+app.use(handleError);
 
 const gracefullyExit = () => {
   app.close(() => {

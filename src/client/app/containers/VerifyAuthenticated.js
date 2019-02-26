@@ -67,7 +67,7 @@ class VerifyAuthenticated extends Component {
       }
     } catch (e) {
       this.setState({ isLoading: false });
-      logError('VerifyAuth', e);
+      logError("VerifyAuth", e);
     }
   }
 

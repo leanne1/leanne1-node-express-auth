@@ -18,7 +18,7 @@ const submitLogin = async (storeData, history, values, { setSubmitting }) => {
     });
     history.push("/");
   } catch (e) {
-    logError('Login', e);
+    logError("Login", e);
     setSubmitting(false);
     storeData("auth", {
       error: "There was an error logging in. Please try again"

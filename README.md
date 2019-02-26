@@ -8,8 +8,6 @@ Full-stack Express React application demonstrating various user authentication s
 Authentication is persisted across browser session/refresh.
 
 
-
-
 ## Install
 
 - Clone this repo
@@ -20,11 +18,12 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout dev.key -out dev.crt
 ```
 - Add both the `.crt` and `.key` file to the root directory
 - [Install MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
-
+- For session strategy (`master` branch) [install Redis](https://1upnote.me/post/2018/06/install-config-redis-on-mac-homebrew/)
 
 ## Run
 - Start the Mongo daemon: `mongod`
-- `REDIS_STORE_SECRET=secret SESSION_SECRET=secretaswell npm run dev` => `https://localhost:8443`
+- If `master` branch (Sessions) start Redis: `redis-server`
+- `npm run dev` => `https://localhost:8443`
 - Click proceed on browser SSL certificate warning
 - Use Mongo Compass to inspect the `user` database
 
