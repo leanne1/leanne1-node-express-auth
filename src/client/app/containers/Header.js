@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import get from "lodash.get";
 import axios from "axios";
-import { logError } from '../util';
+import { logError } from "../util";
 import { AppContext } from "../store/Provider";
 
 const logout = async (storeData, resetData, history) => {
@@ -18,7 +18,7 @@ const logout = async (storeData, resetData, history) => {
     resetData("content", "signup");
     history.push("/login");
   } catch (e) {
-    logError(e);
+    logError('Logout', e);
   }
 };
 

@@ -1,1 +1,1 @@
-export { logError } from './error';
+export { logError } from "./error";

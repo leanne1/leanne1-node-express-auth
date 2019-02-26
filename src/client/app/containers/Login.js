@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { AppContext } from "../store/Provider";
-import { logError } from '../util';
+import { logError } from "../util";
 import ErrorMessage from "../components/ErrorMessage";
 
 const submitLogin = async (storeData, history, values, { setSubmitting }) => {
@@ -18,7 +18,7 @@ const submitLogin = async (storeData, history, values, { setSubmitting }) => {
     });
     history.push("/");
   } catch (e) {
-    logError(e);
+    logError('Login', e);
     setSubmitting(false);
     storeData("auth", {
       error: "There was an error logging in. Please try again"

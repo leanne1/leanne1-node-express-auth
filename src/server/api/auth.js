@@ -16,15 +16,22 @@ router.post(
   })
 );
 
-router.get("/me", authenticate, (req, res) => {
-  return res.send({
-    username: req.user.username
-  });
-});
+router.get(
+  "/me",
+  authenticate,
+  attemptAsync((req, res) => {
+    return res.send({
+      username: req.user.username
+    });
+  })
+);
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  return res.sendStatus(200);
-});
+router.get(
+  "/logout",
+  attemptAsync((req, res) => {
+    req.logout();
+    return res.sendStatus(200);
+  })
+);
 
 export default router;

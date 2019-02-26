@@ -30,7 +30,7 @@ router.post(
     const user = await createUser(body, hashedPassword);
 
     return res.send({
-      _id: user._id, // eslint-disable-line no-underscore-dangle
+      id: user._id, // eslint-disable-line no-underscore-dangle
       username: user.username
     });
   })

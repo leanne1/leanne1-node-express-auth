@@ -1,4 +1,3 @@
-/* global document */
 import "../styles/style.scss";
 import "../styles/vendor/vendor.css";
 import React from "react";
@@ -17,7 +16,7 @@ const render = Component => {
 
 render(App);
 
-// All React modules in app tree accept HMR updates starting with parent node
+// All React modules in app tree accept HMR updates starting with root node
 if (module.hot) {
   module.hot.accept("./containers/App.js", () => {
     const NextRoutes = require("./containers/App.js").default;
