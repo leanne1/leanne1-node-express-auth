@@ -21,7 +21,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout dev.key -out dev.crt
 
 ## Run
 - Start the Mongo daemon: `mongod`
-- If `master` branch (Sessions) start Redis: `redis-server`
+- If `master` branch (sessions) start Redis: `redis-server`
 - `npm run dev` => `https://localhost:8443`
 - Click proceed on browser SSL certificate warning
 - Use Mongo Compass to inspect the `user` database
