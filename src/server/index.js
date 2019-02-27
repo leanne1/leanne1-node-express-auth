@@ -38,7 +38,7 @@ const clientDirPath = isDev
 app.use(helmet());
 app.use(compression());
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ type: "json" })); // Accept only JSON request body - mitigate CSRF
 app.use(morgan("tiny"));
 // Sessions and passport
 app.use(
@@ -53,7 +53,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
 useApi(app);
 
 // Serve static files

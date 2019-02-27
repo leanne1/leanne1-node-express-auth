@@ -17,3 +17,6 @@ dist/
 # SSL
 dev.crt
 dev.key
+
+# Redis
+*.rdb
