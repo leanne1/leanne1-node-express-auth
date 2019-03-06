@@ -5,7 +5,7 @@ Full-stack Express React application demonstrating various user authentication s
 ## Branches
 
 - `master`: Session authentication using Passport Local and session cookie. Sessions stored in Redis. Authentication is persisted across browser session/refresh. Includes CSRF protection via disabling of CORS (by default) and accepting only JSON request body.
-- `jwt`: JWT authentication with JWT issued and stored in Local Storage. Authentication is persisted across browser session/refresh.
+- `jwt`: JWT authentication with JWT stored in browser Local Storage. Authentication is persisted across browser session/refresh.
 
 
 ## Install
