@@ -24,7 +24,7 @@ router.post(
       return res.status(401).send(invalidCredentialsMessage);
 
     const accessToken = jwt.sign(
-      { sub: username },
+      { sub: username, expiresIn: "1h" },
       process.env.JWT_SIGNING_SECRET
     );
 
