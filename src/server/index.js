@@ -17,7 +17,6 @@ import { handleError } from "./middleware";
 import { connectToDb } from "./db";
 import { handleExceptions } from "./log";
 import { useApi } from "./api";
-import "./middleware/login";
 
 handleExceptions();
 config();
@@ -29,7 +28,6 @@ const key = fs.readFileSync("dev.key", "utf8");
 const cert = fs.readFileSync("dev.crt", "utf8");
 const app = express();
 const httpsServer = https.createServer({ key, cert }, app);
-const RedisStore = ConnectRedis(session); // eslint-disable-line no-unused-vars
 
 const clientDirPath = isDev
   ? path.join(__dirname, "../../", "dist/client")
@@ -37,22 +35,10 @@ const clientDirPath = isDev
 
 app.use(helmet());
 app.use(compression());
-app.use(cookieParser());
 app.use(bodyParser.json({ type: "json" })); // Accept only JSON request body - mitigate CSRF
 app.use(morgan("tiny"));
 // Sessions and passport
-app.use(
-  session({
-    store: new RedisStore({
-      url: process.env.REDIS_STORE_URL
-    }),
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+
 useApi(app);
 
 // Serve static files
@@ -76,7 +62,7 @@ if (isDev) {
 app.use(handleError);
 
 const gracefullyExit = () => {
-  app.close(() => {
+  httpsServer.close(() => {
     console.log("Process terminated"); // eslint-disable-line no-console
   });
 };
