@@ -76,7 +76,7 @@ if (isDev) {
 app.use(handleError);
 
 const gracefullyExit = () => {
-  app.close(() => {
+  httpsServer.close(() => {
     console.log("Process terminated"); // eslint-disable-line no-console
   });
 };
