@@ -6,6 +6,7 @@ import get from "lodash.get";
 import axios from "axios";
 import { logError } from "../util";
 import { AppContext } from "../store/Provider";
+import { JWT_STORE_KEY } from "../constants";
 
 const logout = async (storeData, resetData, history) => {
   try {
@@ -14,6 +15,7 @@ const logout = async (storeData, resetData, history) => {
       isLoggedIn: false,
       error: null
     });
+    localStorage.removeItem(JWT_STORE_KEY);
     // Clear client store
     resetData("content", "signup");
     history.push("/login");

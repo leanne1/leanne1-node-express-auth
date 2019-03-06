@@ -5,6 +5,7 @@ import get from "lodash.get";
 import { withRouter } from "react-router";
 import { logError } from "../util";
 import { AppContext } from "../store/Provider";
+import { JWT_STORE_KEY } from "../constants";
 
 const VerifyAuthenticatedContainer = props => {
   return (
@@ -55,7 +56,11 @@ class VerifyAuthenticated extends Component {
     const { storeData, history } = this.props;
     try {
       this.setState({ isLoading: true });
-      const { data } = await axios.get("/api/auth/me");
+      const { data } = await axios.get("/api/auth/me", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem(JWT_STORE_KEY)}`
+        }
+      });
       const username = get(data, "username");
       if (username) {
         storeData("auth", {

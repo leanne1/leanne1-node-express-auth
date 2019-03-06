@@ -7,15 +7,17 @@ import { Formik, Form } from "formik";
 import { AppContext } from "../store/Provider";
 import { logError } from "../util";
 import ErrorMessage from "../components/ErrorMessage";
+import { JWT_STORE_KEY } from "../constants";
 
 const submitLogin = async (storeData, history, values, { setSubmitting }) => {
   try {
-    await axios.post("/api/auth/login", values);
+    const { data } = await axios.post("/api/auth/login", values);
     setSubmitting(false);
     storeData("auth", {
       isLoggedIn: true,
       error: null
     });
+    localStorage.setItem(JWT_STORE_KEY, data.accessToken);
     history.push("/");
   } catch (e) {
     logError("Login", e);

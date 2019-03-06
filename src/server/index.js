@@ -4,15 +4,11 @@ import https from "https";
 import express from "express";
 import { config } from "dotenv";
 import compression from "compression";
-import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import morgan from "morgan";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
-import passport from "passport";
-import session from "express-session";
-import ConnectRedis from "connect-redis";
 import { handleError } from "./middleware";
 import { connectToDb } from "./db";
 import { handleExceptions } from "./log";
@@ -37,8 +33,6 @@ app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json({ type: "json" })); // Accept only JSON request body - mitigate CSRF
 app.use(morgan("tiny"));
-// Sessions and passport
-
 useApi(app);
 
 // Serve static files

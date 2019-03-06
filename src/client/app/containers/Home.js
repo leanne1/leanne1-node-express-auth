@@ -2,10 +2,16 @@ import React, { Fragment } from "react";
 import axios from "axios";
 import get from "lodash.get";
 import { AppContext } from "../store/Provider";
+import { JWT_STORE_KEY } from "../constants";
 
 const fetchProtectedData = async storeData => {
   try {
-    const { data } = await axios.get("/api/content/protected");
+    const authToken = localStorage.getItem(JWT_STORE_KEY);
+    const { data } = await axios.get("/api/content/protected", {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
     storeData("content", {
       data,
       error: null
